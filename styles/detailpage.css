@@ -44,10 +44,21 @@
 
 /*--------------------------------------corousel-----------------------------*/
 .corouselImage{
-	width: 80rem;
-	height: 35rem !important;
+	width: 70rem;
+	height: 30rem !important;
 }
 
 .carousel-control{
 	width: 2%;
 }
+
+.img-rounded {
+    border-radius: 6px;
+    height: 12rem;
+    max-width: 100% !important;
+}
+/*---------------------------------*/
+#businessTitile{
+	color: #FFFFFF;
+}
+

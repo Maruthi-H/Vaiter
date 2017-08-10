@@ -10,13 +10,14 @@
 
 /* Add a gray background color and some padding to the footer */
 footer {
-  background-color: #f2f2f2;
-  padding: 25px;
+  background-color: #000000;
+  padding: 0.5rem;
+  color: #FFFFFF;
 }
 
 /* ---------------------------------search bar style starts here-------------------*/
 #imaginary_container{
-    margin-top:20%; /* Don't copy this */
+    
 }
 .stylish-input-group .input-group-addon{
     background: white !important; 
@@ -46,4 +47,8 @@ well{
 }
 /* ---------------------------------search bar style ends here-------------------*/
 
-
+.img-rounded {
+    border-radius: 6px;
+    height: 12rem;
+    max-width: 100% !important;
+}

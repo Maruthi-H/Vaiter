@@ -1,11 +1,11 @@
-<div class="container" ng-controller="HomePageController">
+<div ng-controller="HomePageController">
     <div class="row">
         <div class="col-sm-6">
             <div id="imaginary_container">
                 <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control" placeholder={{searchText}}>
+                    <input type="text" ng-model="searchLocation" class="form-control" placeholder="Search on location">
                     <span class="input-group-addon">
-                    <button type="submit">
+                    <button type="submit" ng-click="getSearchData()">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
@@ -15,15 +15,16 @@
         <div class="col-sm-6">
             <div id="imaginary_container">
                 <div class="input-group stylish-input-group">
-                    <input type="text" class="form-control" placeholder={{searchText1}}>
+                    <input type="text" ng-model="searchTerm" class="form-control" placeholder="Search based on term">
                     <span class="input-group-addon">
-                    <button type="submit">
+                    <button type="submit" ng-click="getSearchData()">
                         <span class="glyphicon glyphicon-search"></span>
                     </button>
                     </span>
                 </div>
             </div>
         </div>
+        
     </div>
     </br>
     <div class="row">
@@ -35,18 +36,19 @@
                             <img ng-src={{business.image_url}} alt="" class="img-rounded img-responsive" />
                         </div>
                         <div class="col-sm-6 col-md-8">
-                            <h4>
+                            <h4 ng-click="navToSecondPage(business)">
                             {{business.name}}</h4>
                             <small><cite title="San Francisco, USA">{{business.location.city}}<i class="glyphicon glyphicon-map-marker">
                         </i></cite></small>
                             <p>
                                 <i class="glyphicon glyphicon-envelope"></i>{{business.phone}}
                                 <br />
-                                <i class="glyphicon glyphicon-globe"></i><a href="http://www.jquery2dotnet.com">www.jquery2dotnet.com</a>
+                                <i class="glyphicon glyphicon-star-empty 
+"></i><a href="http://www.jquery2dotnet.com">{{business.rating}}</a>
                                 <br />
-                                <i class="glyphicon glyphicon-gift"></i>June 02, 1988</p>
+                                <i class="glyphicon glyphicon-thumbs-up"></i>{{business.review_count}}</p>
                             <!-- Split button -->
-                            <div class="btn-group">
+                            <!-- <div class="btn-group">
                                 <button type="button" class="btn btn-primary">
                                     Social</button>
                                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -59,7 +61,7 @@
                                     <li class="divider"></li>
                                     <li><a href="#">Github</a></li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

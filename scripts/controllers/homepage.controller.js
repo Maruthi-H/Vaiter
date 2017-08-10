@@ -3,7 +3,7 @@ var vaiperApp = angular.module('myApp', ['ngRoute','ui.carousel','ui.bootstrap']
     vaiperApp.config(function($routeProvider, $locationProvider) {
         $routeProvider
             // route for the home page
-            .when('/home', {
+            .when('/', {
                 templateUrl : 'templates/home.html',
                 controller  : 'HomePageController'
             })
@@ -23,16 +23,24 @@ var vaiperApp = angular.module('myApp', ['ngRoute','ui.carousel','ui.bootstrap']
     });
 
     
-vaiperApp.controller('HomePageController', function($scope, $http) {
-    
-    $scope.searchText1 = "New York";
+vaiperApp.controller('HomePageController', function($scope, $http, SearchService) {
+    // console.log(SearchService.getSearchLocation());
+    $scope.searchText = "San+Francisco";
+    $scope.baseUrl = "https://api.yelp.com/v3/businesses/search";
+    $scope.searchTerm = "food";
+    $scope.searchLocation = "San-Francisco";
+    $scope.completeSearchUrl =  $scope.baseUrl + "?term="+  $scope.searchTerm +"&location=\'" + $scope.searchLocation + "\'";
+    // console.log($scope.completeSearchUrl);
     $scope.searchData = {};
     $scope.searchData = getSearchData();
-
+    $scope.getSearchData = getSearchData;
+    $scope.navToSecondPage = navToSecondPage;
     function getSearchData(){
+        $scope.completeSearchUrl =  $scope.baseUrl + "?term="+  $scope.searchTerm +"&location=\'" + $scope.searchLocation + "\'";
+        // console.log($scope.completeSearchUrl);
         $http({
                   method: 'GET',
-                  url: 'https://api.yelp.com/v3/businesses/search?latitude=37.767413217936834&longitude=-122.42820739746094',
+                  url: $scope.completeSearchUrl,
                   // params: 'latitude=37.767413217936834, longitude=-122.42820739746094',
                   headers: {'Authorization': 'Bearer EI_4TSCvzhRgFa_S-4a897Z3vmJTNs1YGH8gELlzFoHFWyzXPDKAPP0_tlmwoZoBwGOl7MXIPPVtEgZMYEKgaylev4EmO85c1dNeIQUhgilCDnsF6gZ-OSk-9O-BWXYx'}
         }).then(successCallback, errorCallback);
@@ -40,13 +48,18 @@ vaiperApp.controller('HomePageController', function($scope, $http) {
    
 
     function successCallback(response){
-        console.log(response.data.businesses);
+        // console.log(response.data.businesses);
         $scope.searchData = response.data.businesses;
         
     }
     function errorCallback(error){
          console.log(error);
     }  
+
+    function navToSecondPage(oBusiness){
+        // console.log(oBusiness.id);
+        SearchService.setSearchLocation(oBusiness.id);
+    }
 
 
 
